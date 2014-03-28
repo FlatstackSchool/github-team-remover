@@ -1,5 +1,6 @@
 require 'bundler/setup'
 
+require 'remover/github'
 require 'remover/team'
 require 'remover/list'
 
