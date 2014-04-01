@@ -18,6 +18,10 @@ module Remover
       octokit.team_members(github_team_id)
     end
 
+    def team_repositories(github_team_id)
+      octokit.team_repositories(github_team_id)
+    end
+
     private
 
     def github_teams
