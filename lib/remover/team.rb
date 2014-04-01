@@ -10,6 +10,10 @@ module Remover
       with_members? && with_repositories?
     end
 
+    def name
+      github_team.name
+    end
+
     private
 
     def with_members?
