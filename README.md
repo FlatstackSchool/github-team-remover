@@ -1,4 +1,13 @@
-# Ruby base
+# Github Team Remover
+
+## Usage
+
+```ruby
+github-team-remover \
+  --organization FlatstackSchool \
+  --login github-login \
+  --password github-password
+```
 
 ## Install
 

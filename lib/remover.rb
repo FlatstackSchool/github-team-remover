@@ -6,8 +6,8 @@ require 'remover/list'
 require 'remover/cli'
 require 'remover/configuration'
 
-module Remover
-  ORGANIZATION = 'FlatstackSchool'
-  LOGIN = ''
-  PASSWORD = ''
+  module Remover
+  def self.configuration
+    @configuration ||= Configuration.new
+  end
 end

@@ -2,7 +2,7 @@ describe Remover::Configuration do
   let(:options) do
     {
       'organization' => 'FlatSchool',
-      'username' => 'fs-school',
+      'login' => 'fs-school',
       'password' => '123456'
     }
   end
@@ -16,7 +16,7 @@ describe Remover::Configuration do
 
     it 'sets options' do
       expect(configuration.organization).to eq('FlatSchool')
-      expect(configuration.username).to eq('fs-school')
+      expect(configuration.login).to eq('fs-school')
       expect(configuration.password).to eq('123456')
     end
   end

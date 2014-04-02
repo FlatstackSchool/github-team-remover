@@ -1,7 +1,7 @@
 describe Remover::Team do
   let(:github_client) { double('Github Client') }
   let(:github_team) { double('Github Team', id: 1, name: 'Owners') }
-  let(:team) { Remover::Team.new(github_client, github_team)}
+  let(:team) { Remover::Team.new(github_client, github_team) }
 
   describe '#name' do
     it 'returns Github team name' do

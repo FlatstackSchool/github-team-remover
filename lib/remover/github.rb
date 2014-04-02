@@ -25,7 +25,7 @@ module Remover
     private
 
     def github_teams
-      octokit.organization_teams(configuration.organization)
+      octokit.organization_teams(Remover.configuration.organization)
     end
   end
 end

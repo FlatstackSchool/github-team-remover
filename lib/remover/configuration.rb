@@ -1,8 +1,8 @@
 module Remover
   class Configuration
-    OPTIONS = %i(organization username password)
+    OPTIONS = %i(organization login password)
 
-    attr_accessor *OPTIONS
+    attr_accessor(*OPTIONS)
 
     def load_from_options!(options)
       OPTIONS.each do |option|
