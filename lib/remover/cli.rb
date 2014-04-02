@@ -2,6 +2,10 @@ require 'thor'
 
 module Remover
   class CLI < Thor
+    method_option :organization, required: true
+    method_option :username, required: true
+    method_option :password, required: true
+
     desc('list', 'List unused teams')
 
     def list
@@ -20,7 +24,7 @@ module Remover
 
     def octokit
       Octokit::Client.new(
-        login: Remover::LOGIN,
+        login: options[''],
         password: Remover::PASSWORD
       )
     end
