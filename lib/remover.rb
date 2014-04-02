@@ -6,7 +6,7 @@ require 'remover/list'
 require 'remover/cli'
 require 'remover/configuration'
 
-  module Remover
+module Remover
   def self.configuration
     @configuration ||= Configuration.new
   end
