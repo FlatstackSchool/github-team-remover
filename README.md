@@ -7,6 +7,7 @@ github-team-remover \
   --organization FlatstackSchool \
   --login github-login \
   --password github-password
+  --verbose
 ```
 
 ## Install
