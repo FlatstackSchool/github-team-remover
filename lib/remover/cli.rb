@@ -17,8 +17,10 @@ module Remover
         puts 'Unused teams:'.colorize(color)
 
       Remover::List.new(github).unused_teams.each do |unused_team|
-        puts "Team name: #{unused_team.name}, Members: #{unused_team.members_amount},
-              Repositories: #{unused_team.repositories_amount}".colorize(color)
+        puts "
+        Team name: #{unused_team.name},
+        Members: #{unused_team.members_amount},
+        Repositories: #{unused_team.repositories_amount}".colorize(color)
       end
     end
 
