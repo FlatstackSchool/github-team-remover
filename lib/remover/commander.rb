@@ -3,7 +3,7 @@ require 'colorize'
 require 'octokit'
 
 module Remover
-  class Commander
+  class Commander < Thor
 
     def color
     end
