@@ -1,11 +1,39 @@
 describe Remover::Team do
-  let(:github_client) { double('Github Client') }
+  let(:github_client) { double('Github Client', members_amount: 1, repositories_amount: 1) }
   let(:github_team) { double('Github Team', id: 1, name: 'Owners') }
   let(:team) { Remover::Team.new(github_client, github_team) }
 
   describe '#name' do
     it 'returns Github team name' do
       expect(team.name).to eq(github_team.name)
+    end
+  end
+
+  describe '#members' do
+    let(:members_amount) { [double(1)] }
+
+    before do
+      allow(github_client).to receive(:team_members) { members_amount }
+    end
+
+    context 'must be equal' do
+      it 'returns amount of members' do
+        expect(team.members_amount.size).to eq(github_client.members_amount.size)
+      end
+    end
+  end
+
+  describe '#repositories_amount' do
+    let(:repositories_amount) { [double(1)] }
+
+    before do
+      allow(github_client).to receive(:team_repositories) { repositories_amount }
+    end
+
+    context 'must be equal' do
+      it 'returns amount of repos' do
+        expect(team.repositories_amount.size).to eq(github_client.repositories_amount.size)
+      end
     end
   end
 

@@ -15,11 +15,11 @@ module Remover
       github_team.name
     end
 
-    def members
+    def members_amount
       github_client.team_members(github_team.id).size
     end
 
-    def repos
+    def repositories_amount
       github_client.team_repositories(github_team.id).size
     end
 

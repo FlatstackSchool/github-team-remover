@@ -14,11 +14,11 @@ module Remover
 
     def list
       Remover.configuration.load_from_options!(options)
-
         puts 'Unused teams:'.colorize(color)
 
       Remover::List.new(github).unused_teams.each do |unused_team|
-        puts "Team name: #{unused_team.name}, Members: #{unused_team.members}, Repositories: #{unused_team.repos}".colorize(color)
+        puts "Team name: #{unused_team.name}, Members: #{unused_team.members_amount},
+              Repositories: #{unused_team.repositories_amount}".colorize(color)
       end
     end
 
