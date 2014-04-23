@@ -1,3 +1,4 @@
+# added members & repos
 module Remover
   class Team
     attr_accessor :github_client, :github_team
@@ -12,6 +13,14 @@ module Remover
 
     def name
       github_team.name
+    end
+
+    def members
+      github_client.team_members(github_team.id).size
+    end
+
+    def repos
+      github_client.team_repositories(github_team.id).size
     end
 
     private

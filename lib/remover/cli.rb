@@ -1,19 +1,23 @@
 require 'thor'
+require 'colorize'
 
 module Remover
   class CLI < Thor
-    method_option :organization, required: true
-    method_option :login, required: true
-    method_option :password, required: true
+    method_option :organization, :aliases => "--o", required: true
+    method_option :login, :aliases => "--l", required: true
+    method_option :password, :aliases => "--p", required: true
 
-    desc('list', 'List unused teams')
+    desc('|Commands:', 'Alias, Command, Meaning.')
 
     def list
       Remover.configuration.load_from_options!(options)
 
-      Remover::List.new(github).unused_teams.each do |team|
-        puts team.name
+        puts 'Unused teams:'.colorize(:blue)
+
+      Remover::List.new(github).unused_teams.each do |unused_team|
+        puts "Team name: #{unused_team.name}, Members: #{unused_team.members}, Repositories: #{unused_team.repos}"
       end
+
     end
 
     default_task :list
