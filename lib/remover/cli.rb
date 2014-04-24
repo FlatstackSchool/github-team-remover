@@ -15,18 +15,37 @@ module Remover
     def list
       Remover.configuration.load_from_options!(options)
         puts 'Unused teams:'.colorize(color)
-
-      Remover::List.new(github).unused_teams.each do |unused_team|
-        puts "
-        Team name: #{unused_team.name},
-        Members: #{unused_team.members_amount},
-        Repositories: #{unused_team.repositories_amount}".colorize(color)
+      if verbose?
+        Remover::List.new(github).unused_teams.each do |unused_team|
+           puts "
+          Team name: #{unused_team.name},
+          Members: #{unused_team.members_amount},
+          Members URL: #{unused_team.members_url},
+          Repositories: #{unused_team.repositories_amount},
+          Repositories URL: #{unused_team.repositories_url}
+          ".colorize(color)
+        end
+      else
+        Remover::List.new(github).unused_teams.each do |unused_team|
+          puts "
+          Team name: #{unused_team.name},
+          Members: #{unused_team.members_amount},
+          Repositories: #{unused_team.repositories_amount}".colorize(color)
+        end
       end
     end
 
     default_task :list
 
     private
+
+    def verbose?
+      if ! options[:verbose].eql? nil
+        true
+      else
+        false
+      end
+    end
 
     def color
       Remover.configuration.color.to_sym

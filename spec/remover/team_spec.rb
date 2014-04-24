@@ -1,5 +1,5 @@
 describe Remover::Team do
-  let(:github_client) { double('Github Client', members_amount: 1, repositories_amount: 1) }
+  let(:github_client) { double('Github Client', members_amount: 1, repositories_amount: 1, members_url: 'url') }
   let(:github_team) { double('Github Team', id: 1, name: 'Owners') }
   let(:team) { Remover::Team.new(github_client, github_team) }
 
@@ -9,14 +9,30 @@ describe Remover::Team do
     end
   end
 
+
+  describe '#members_url' do
+    let(:members_url) {[double('Github Member')]}
+
+    before do
+      allow(github_client).to receive(:team_members) {members_url}
+    end
+
+    context 'members_url' do
+      it 'returns members url' do
+        expect(team.members_url).to eq(github_client.members_url)
+      end
+    end
+  end
+
+
   describe '#members' do
-    let(:members_amount) { [double(1)] }
+    let(:members_amount) { [double('Github Member')] }
 
     before do
       allow(github_client).to receive(:team_members) { members_amount }
     end
 
-    context 'must be equal' do
+    context 'memebers amount' do
       it 'returns amount of members' do
         expect(team.members_amount.size).to eq(github_client.members_amount.size)
       end
