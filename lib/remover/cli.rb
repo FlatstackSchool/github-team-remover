@@ -7,31 +7,27 @@ module Remover
     method_option :organization, :aliases => '--o', required: true
     method_option :login, :aliases => '--l', required: true
     method_option :password, :aliases => '--p', required: true
-    method_option :color, :aliases => '--c'
+    method_option :color, :aliases => '--c', :default => :white
     method_option :verbose, :aliases => '--v'
+    method_option :delete, :aliases => '--d'
 
     desc('|Commands:', 'Alias, Command, Meaning.')
 
     def list
       Remover.configuration.load_from_options!(options)
         puts 'Unused teams:'.colorize(color)
-      if verbose?
         Remover::List.new(github).unused_teams.each do |unused_team|
-           puts "
-          Team name: #{unused_team.name},
-          Members: #{unused_team.members_amount},
-          Members URL: #{unused_team.members_url},
-          Repositories: #{unused_team.repositories_amount},
-          Repositories URL: #{unused_team.repositories_url}
-          ".colorize(color)
-        end
-      else
-        Remover::List.new(github).unused_teams.each do |unused_team|
-          puts "
-          Team name: #{unused_team.name},
-          Members: #{unused_team.members_amount},
-          Repositories: #{unused_team.repositories_amount}".colorize(color)
-        end
+          puts "         ------------------------------".colorize(color)
+          puts "                   DELETED!".colorize(:red) if delete?
+          puts "         Team name: #{unused_team.name}".colorize(color)
+          puts "         Members: #{unused_team.members_amount}".colorize(color)
+          puts "         Members URL:".colorize(color)
+          puts "         #{unused_team.members_url.colorize(:yellow)}" if verbose?
+          puts "         Repositories: #{unused_team.repositories_amount}".colorize(color)
+          puts "         Repositories URL:".colorize(color)
+          puts "         #{unused_team.repositories_url.colorize(:yellow)}" if verbose?
+          puts "         ------------------------------".colorize(color)
+          unused_team.delete_team
       end
     end
 
@@ -39,16 +35,16 @@ module Remover
 
     private
 
+    def delete?
+      true if options[:delete]
+    end
+
     def verbose?
-      if ! options[:verbose].eql? nil
-        true
-      else
-        false
-      end
+      true if options[:verbose]
     end
 
     def color
-      Remover.configuration.color.to_sym
+      Remover.configuration.color.intern
     end
 
     def github

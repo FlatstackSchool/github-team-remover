@@ -14,6 +14,10 @@ module Remover
       github_team.name
     end
 
+    def delete_team
+      github_client.delete_team(github_team.id)
+    end
+
     def members_url
       if with_members?
         hash = Hash(*github_client.team_members(github_team.id))
