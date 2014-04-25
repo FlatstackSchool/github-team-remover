@@ -14,7 +14,7 @@ module Remover
       put_repos_list if verbose
       put_members_amount
       put_members_list if verbose
-      Remover::Remove.new.remove_and_put_message if remove
+      Remover::Remove.new(team).remove_and_put_message if remove
       puts '    -------------------------'
     end
 
