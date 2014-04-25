@@ -24,6 +24,7 @@ module Remover
     --d => will delete all unused teams
     LONGDESC
 
+
     def list
       Remover.configuration.load_from_options!(options)
         puts 'Unused teams:'.colorize(color)
