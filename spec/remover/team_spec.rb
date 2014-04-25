@@ -39,6 +39,28 @@ describe Remover::Team do
     end
   end
 
+  describe '#delete_team' do
+    context 'if deleted' do
+      before do
+        allow(github_client).to receive(:delete_team) { true }
+      end
+
+      it 'returns true' do
+        expect(team.delete_team).to eq(github_client.delete_team(github_team.id))
+      end
+    end
+
+    context 'if not deleted' do
+      before do
+        allow(github_client).to receive(:delete_team) { false }
+      end
+
+      it 'returns false' do
+        expect(team.delete_team).to eq(github_client.delete_team(github_team.id))
+      end
+    end
+  end
+
   describe '#list_repos' do
     before do
       allow(github_client).to receive(:team_repositories) { [] }

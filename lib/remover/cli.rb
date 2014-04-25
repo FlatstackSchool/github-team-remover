@@ -7,6 +7,7 @@ module Remover
     method_option :login, aliases: '--log', required: true
     method_option :password, aliases: '--pas', required: true
     method_option :verbose, aliases: '--ver', desc: 'Puts additional info'
+    method_option :remove, aliases: '--rem', desc: 'Removes unused teams'
     desc('list', 'List unused teams')
 
     def list
@@ -27,7 +28,13 @@ module Remover
       put_repos_list(team) if verbose?
       put_members_amount(team)
       put_members_list(team) if verbose?
+      remove_and_put_message(team) if remove?
       puts '    -------------------------'
+    end
+
+    def remove_and_put_message(team)
+      team.delete_team
+      puts "          TEAM #{team.name} WAS REMOVED!".red_on_yellow
     end
 
     def put_repos_amount(team)
@@ -56,6 +63,10 @@ module Remover
 
     def verbose?
       true if options[:verbose]
+    end
+
+    def remove?
+      true if options[:remove]
     end
 
     def github
