@@ -14,6 +14,22 @@ module Remover
       github_team.name
     end
 
+    def members_amount
+      github_client.team_members(github_team.id).size
+    end
+
+    def repos_amount
+      github_client.team_repositories(github_team.id).size
+    end
+
+    def list_members
+      github_client.team_members(github_team.id)
+    end
+
+    def list_repos
+      github_client.team_repositories(github_team.id)
+    end
+
     private
 
     def with_members?
