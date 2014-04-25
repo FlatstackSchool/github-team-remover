@@ -1,5 +1,4 @@
 require 'thor'
-require 'colored'
 
 module Remover
   class CLI < Thor
@@ -12,54 +11,14 @@ module Remover
 
     def list
       Remover.configuration.load_from_options!(options)
-
       Remover::List.new(github).unused_teams.each do |team|
-        list_output(team)
+        Remover::Output.new(team, verbose?, remove?).list_output
       end
     end
 
     default_task :list
 
     private
-
-    def list_output(team)
-      put_team_name(team)
-      put_repos_amount(team)
-      put_repos_list(team) if verbose?
-      put_members_amount(team)
-      put_members_list(team) if verbose?
-      remove_and_put_message(team) if remove?
-      puts '    -------------------------'
-    end
-
-    def remove_and_put_message(team)
-      team.delete_team
-      puts "          TEAM #{team.name} WAS REMOVED!".red_on_yellow
-    end
-
-    def put_repos_amount(team)
-      puts "      Repositories amount: #{team.repos_amount}".green
-    end
-
-    def put_members_amount(team)
-      puts "      Members amount: #{team.members_amount}".green
-    end
-
-    def put_team_name(team)
-      puts "    Team Name: #{team.name}".red
-    end
-
-    def put_repos_list(team)
-      team.list_repos.each do |repos|
-        puts "        #{repos.html_url}".yellow
-      end
-    end
-
-    def put_members_list(team)
-      team.list_members.each do |member|
-        puts "        #{member.html_url}".yellow
-      end
-    end
 
     def verbose?
       true if options[:verbose]
