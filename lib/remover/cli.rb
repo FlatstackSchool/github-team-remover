@@ -3,7 +3,6 @@ require 'colorize'
 
 module Remover
   class CLI < Thor
-
     method_option :organization, :aliases => '--o', required: true
     method_option :login, :aliases => '--l', required: true
     method_option :password, :aliases => '--p', required: true
@@ -24,22 +23,21 @@ module Remover
     --d => will delete all unused teams
     LONGDESC
 
-
     def list
       Remover.configuration.load_from_options!(options)
-        puts 'Unused teams:'.colorize(color)
-        Remover::List.new(github).unused_teams.each do |unused_team|
-          puts "         ------------------------------".colorize(color)
-          puts "                   DELETED!".colorize(:red) if delete?
-          puts "         Team name: #{unused_team.name}".colorize(color)
-          puts "         Members: #{unused_team.members_amount}".colorize(color)
-          puts "         Members URL:".colorize(color)
-          puts "         #{unused_team.members_url.colorize(:yellow)}" if verbose?
-          puts "         Repositories: #{unused_team.repositories_amount}".colorize(color)
-          puts "         Repositories URL:".colorize(color)
-          puts "         #{unused_team.repositories_url.colorize(:yellow)}" if verbose?
-          puts "         ------------------------------".colorize(color)
-          unused_team.delete_team
+      puts 'Unused teams:'.colorize(color)
+      Remover::List.new(github).unused_teams.each do |unused_team|
+        puts '         ------------------------------'.colorize(color)
+        puts '                   DELETED!'.colorize(:red) if delete?
+        puts "         Team name: #{unused_team.name}".colorize(color)
+        puts "         Members: #{unused_team.members_amount}".colorize(color)
+        puts '         Members URL:'.colorize(color)
+        puts "         #{unused_team.members_url.colorize(:yellow)}" if verbose?
+        puts "         Repositories: #{unused_team.repositories_amount}".colorize(color)
+        puts '         Repositories URL:'.colorize(color)
+        puts "         #{unused_team.repositories_url.colorize(:yellow)}" if verbose?
+        puts '         ------------------------------'.colorize(color)
+        unused_team.delete_team
       end
     end
 

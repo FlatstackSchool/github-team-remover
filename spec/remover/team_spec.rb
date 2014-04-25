@@ -9,7 +9,6 @@ describe Remover::Team do
     end
   end
 
-
   describe '#members_url' do
     before do
       allow(github_client).to receive(:team_members) { [] }
@@ -30,14 +29,13 @@ describe Remover::Team do
     end
   end
 
-
   describe '#members' do
     before do
       allow(github_client).to receive(:team_members) { [] }
     end
 
     it 'returns amount of members' do
-        expect(team.members_amount).to eq(github_client.team_members(github_team.id).size)
+      expect(team.members_amount).to eq(github_client.team_members(github_team.id).size)
     end
   end
 
@@ -46,10 +44,10 @@ describe Remover::Team do
       allow(github_client).to receive(:team_repositories) { [] }
     end
 
-      it 'returns amount of repos' do
-         expect(team.repositories_amount).to eq(github_client.team_repositories(github_team.id).size)
-      end
+    it 'returns amount of repos' do
+      expect(team.repositories_amount).to eq(github_client.team_repositories(github_team.id).size)
     end
+  end
 
   describe '#delete_team' do
     context 'if deleted' do
@@ -57,10 +55,10 @@ describe Remover::Team do
         allow(github_client).to receive(:delete_team) { true }
       end
 
-      it 'returns true' do
-        expect(team.delete_team).to eq(github_client.delete_team(github_team.id))
-      end
+    it 'returns true' do
+      expect(team.delete_team).to eq(github_client.delete_team(github_team.id))
     end
+  end
 
     context 'if not deleted' do
       before do

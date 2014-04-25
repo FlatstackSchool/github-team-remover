@@ -33,7 +33,6 @@ describe Remover::CLI do
     end
   end
 
-
   describe '#verbose' do
     before do
       configuration.load_from_options!(options)
@@ -54,7 +53,6 @@ describe Remover::CLI do
       end
     end
   end
-
 
   describe '#delete_team' do
     before do

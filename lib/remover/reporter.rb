@@ -3,7 +3,7 @@ require 'colorize'
 module Remover
   class Reporter
 
-    attr_accessor :unused_team :color, :verbose, :delete
+    attr_accessor :unused_team, :color, :verbose, :delete
 
     def initialize(unused_team, color, verbose, delete)
       @unused_team, @color, @verbose, @delete = unused_team, color, verbose, delete
