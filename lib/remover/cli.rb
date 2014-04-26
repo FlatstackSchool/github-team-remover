@@ -5,6 +5,7 @@ module Remover
     method_option :organization, required: true
     method_option :login, required: true
     method_option :password, required: true
+    method_option :verbose
 
     desc('list', 'List unused teams')
 
@@ -12,13 +13,17 @@ module Remover
       Remover.configuration.load_from_options!(options)
 
       Remover::List.new(github).unused_teams.each do |team|
-        Remover::Output.new(team).output
+        Remover::Output.new(team, verbose?).output
       end
     end
 
     default_task :list
 
     private
+
+    def verbose?
+      options[:verbose]
+    end
 
     def github
       Remover::Github.new(octokit)
