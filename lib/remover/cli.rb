@@ -5,8 +5,8 @@ module Remover
     method_option :organization, required: true
     method_option :login, required: true
     method_option :password, required: true
-    method_option :verbose
-    method_option :remove
+    method_option :verbose, desc: 'Puts members and repositories links'
+    method_option :remove, desc: 'Remove unused teams'
 
     desc('list', 'List unused teams')
 

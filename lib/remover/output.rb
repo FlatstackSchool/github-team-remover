@@ -47,7 +47,7 @@ module Remover
     end
 
     def removed_team
-      Remover::Remove.new(team).remove
+      team.remove
       puts "     #{team.name} removed".colorize(:yellow)
     end
   end
