@@ -30,6 +30,10 @@ module Remover
       github_client.team_repositories(github_team.id)
     end
 
+    def remove
+      github_client.delete_team(github_team.id)
+    end
+
     private
 
     def with_members?

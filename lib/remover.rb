@@ -6,6 +6,7 @@ require 'remover/list'
 require 'remover/cli'
 require 'remover/configuration'
 require 'remover/output'
+require 'remover/remove'
 
 module Remover
   def self.configuration

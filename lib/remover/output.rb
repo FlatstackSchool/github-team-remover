@@ -2,10 +2,10 @@ require 'colorize'
 
 module Remover
   class Output
-    attr_accessor :team, :verbose
+    attr_accessor :team, :verbose, :remove
 
-    def initialize(team, verbose)
-      @team, @verbose = team, verbose
+    def initialize(team, verbose, remove)
+      @team, @verbose, @remove = team, verbose, remove
     end
 
     def output
@@ -15,6 +15,8 @@ module Remover
       puts
       number_of_repositories
       repositories if verbose
+      puts
+      removed_team if remove
       puts
     end
 
@@ -42,6 +44,11 @@ module Remover
       team.repositories.each do |repo|
         puts "     #{repo.name}:  #{repo.html_url}".colorize(:green)
       end
+    end
+
+    def removed_team
+      Remover::Remove.new(team).remove
+      puts "     #{team.name} removed".colorize(:yellow)
     end
   end
 end

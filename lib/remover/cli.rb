@@ -6,6 +6,7 @@ module Remover
     method_option :login, required: true
     method_option :password, required: true
     method_option :verbose
+    method_option :remove
 
     desc('list', 'List unused teams')
 
@@ -13,7 +14,7 @@ module Remover
       Remover.configuration.load_from_options!(options)
 
       Remover::List.new(github).unused_teams.each do |team|
-        Remover::Output.new(team, verbose?).output
+        Remover::Output.new(team, verbose?, remove?).output
       end
     end
 
@@ -23,6 +24,10 @@ module Remover
 
     def verbose?
       options[:verbose]
+    end
+
+    def remove?
+      options[:remove]
     end
 
     def github
