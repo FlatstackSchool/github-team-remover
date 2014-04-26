@@ -12,7 +12,7 @@ module Remover
       Remover.configuration.load_from_options!(options)
 
       Remover::List.new(github).unused_teams.each do |team|
-        puts team.name
+        Remover::Output.new(team).output
       end
     end
 
