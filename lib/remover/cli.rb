@@ -31,13 +31,13 @@ module Remover
         puts '                   DELETED!'.colorize(:red) if delete?
         puts "         Team name: #{unused_team.name}".colorize(color)
         puts "         Members: #{unused_team.members_amount}".colorize(color)
-        puts '         Members URL:'.colorize(color)
+        puts '         Members URL:'.colorize(color) if verbose?
         puts "         #{unused_team.members_url.colorize(:yellow)}" if verbose?
         puts "         Repositories: #{unused_team.repositories_amount}".colorize(color)
-        puts '         Repositories URL:'.colorize(color)
+        puts '         Repositories URL:'.colorize(color) if verbose?
         puts "         #{unused_team.repositories_url.colorize(:yellow)}" if verbose?
         puts '         ------------------------------'.colorize(color)
-        unused_team.delete_team
+        unused_team.delete_team if delete?
       end
     end
 
