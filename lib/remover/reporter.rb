@@ -11,12 +11,12 @@ module Remover
 
     def report_to_cli
       puts "         ------------------------------".colorize(color_it)
-      report_and_delete
       team_name
       members_amount
       members_url
       repos_amount
       repos_url
+      report_and_delete
       puts "         ------------------------------".colorize(color_it)
     end
 
@@ -45,7 +45,7 @@ module Remover
     end
 
     def report_and_delete
-      puts "                   DELETED!".colorize(:red) if delete
+      puts "                   !DELETED!".colorize(:red) if delete
       unused_team.delete_team
     end
 

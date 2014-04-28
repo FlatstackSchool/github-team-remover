@@ -1,5 +1,5 @@
 describe Remover::Team do
-  let(:github_client) { double('Github Client', members_amount: 1, repositories_amount: 1, members_url: 'url') }
+  let(:github_client) { double('Github Client') }
   let(:github_team) { double('Github Team', id: 1, name: 'Owners') }
   let(:team) { Remover::Team.new(github_client, github_team) }
 
