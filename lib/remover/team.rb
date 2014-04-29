@@ -37,11 +37,11 @@ module Remover
     private
 
     def with_members?
-      github_client.team_members(github_team.id).size > 0
+      members_amount > 0
     end
 
     def with_repositories?
-      github_client.team_repositories(github_team.id).size > 0
+      repos_amount > 0
     end
   end
 end
