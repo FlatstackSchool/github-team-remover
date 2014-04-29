@@ -3,9 +3,9 @@ require 'colored'
 module Remover
   class Formatter
     TEAM_NAME = '    Team Name: %{name}'
-    MEMBERS_AMOUNT = '      Members amount: %{mem_am}"'
+    MEMBERS_AMOUNT = '      Members amount: %{mem_am}'
     REPOS_AMOUNT = '      Repositories amount: %{rep_am}'
-    REPOS_LIST = '        %{rep_list}"'
+    REPOS_LIST = '        %{rep_list}'
     MEMBERS_LIST = '        %{mem_list}'
     DELETE_MESSAGE = '        TEAM %{del_name} DELETED!'
 
