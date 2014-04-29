@@ -4,9 +4,13 @@
 
 ```ruby
 github-team-remover \
-  --organization FlatstackSchool \
-  --login github-login \
-  --password github-password
+  --organization FlatstackSchool, or --o \
+  --login github-login, or --l \
+  --password github-password, or --p \
+optional
+  --color color, like blue, or --c \
+  --verbose or --v
+  --delete  or --d
 ```
 
 ## Install
