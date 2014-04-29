@@ -1,6 +1,6 @@
 module Remover
   class Configuration
-    OPTIONS = %i(organization login password)
+    OPTIONS = %i(organization login password verbose remove)
 
     attr_accessor(*OPTIONS)
 
@@ -8,6 +8,14 @@ module Remover
       OPTIONS.each do |option|
         send("#{option}=", options[option.to_s])
       end
+    end
+
+      def verbose?
+      true if options[:verbose]
+    end
+
+    def remove?
+      true if options[:remove]
     end
   end
 end

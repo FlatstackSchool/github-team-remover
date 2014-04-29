@@ -3,7 +3,9 @@ describe Remover::Configuration do
     {
       'organization' => 'FlatSchool',
       'login' => 'fs-school',
-      'password' => '123456'
+      'password' => '123456',
+      'verbose' => 'true',
+      'remove' => 'true'
     }
   end
 
@@ -18,6 +20,8 @@ describe Remover::Configuration do
       expect(configuration.organization).to eq('FlatSchool')
       expect(configuration.login).to eq('fs-school')
       expect(configuration.password).to eq('123456')
+      expect(configuration.verbose).to eq('true')
+      expect(configuration.remove).to eq('true')
     end
   end
 end

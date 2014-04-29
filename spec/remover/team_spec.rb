@@ -9,6 +9,68 @@ describe Remover::Team do
     end
   end
 
+  describe '#members_amount' do
+    before do
+      allow(github_client).to receive(:team_members) { [] }
+    end
+
+    it 'returns Github team members amount' do
+      expect(team.members_amount).to eq(github_client.team_members(github_team.id).size)
+    end
+  end
+
+  describe '#repos_amount' do
+    before do
+      allow(github_client).to receive(:team_repositories) { [] }
+    end
+
+    it 'returns Github team repository amount' do
+      expect(team.repos_amount).to eq(github_client.team_repositories(github_team.id).size)
+    end
+  end
+
+  describe '#list_members' do
+    before do
+      allow(github_client).to receive(:team_members) { [] }
+    end
+
+    it 'returns array' do
+      expect(team.list_members).to be_an(Array)
+    end
+  end
+
+  describe '#delete_team' do
+    context 'if deleted' do
+      before do
+        allow(github_client).to receive(:delete_team) { true }
+      end
+
+      it 'returns true' do
+        expect(team.delete_team).to eq(github_client.delete_team(github_team.id))
+      end
+    end
+
+    context 'if not deleted' do
+      before do
+        allow(github_client).to receive(:delete_team) { false }
+      end
+
+      it 'returns false' do
+        expect(team.delete_team).to eq(github_client.delete_team(github_team.id))
+      end
+    end
+  end
+
+  describe '#list_repos' do
+    before do
+      allow(github_client).to receive(:team_repositories) { [] }
+    end
+
+    it 'returns array' do
+      expect(team.list_repos).to be_an(Array)
+    end
+  end
+
   describe '#used' do
     let(:members) { [double('Github Member')] }
     let(:repositories) { [double('Github Repository')] }
