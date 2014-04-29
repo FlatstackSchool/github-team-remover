@@ -2,7 +2,6 @@ require 'colorize'
 
 module Remover
   class Reporter
-
     attr_accessor :unused_team, :color, :verbose, :delete
 
     def initialize(unused_team, color, verbose, delete)
@@ -10,14 +9,14 @@ module Remover
     end
 
     def report_to_cli
-      puts "         ------------------------------".colorize(color_it)
+      puts '         ------------------------------'.colorize(color_it)
       team_name
       members_amount
       members_url if verbose?
       repos_amount
       repos_url if verbose?
       report_and_delete if delete?
-      puts "         ------------------------------".colorize(color_it)
+      puts '         ------------------------------'.colorize(color_it)
     end
 
     private
@@ -39,7 +38,7 @@ module Remover
     end
 
     def members_url
-      puts "         Members URL:".colorize(color_it)
+      puts '         Members URL:'.colorize(color_it)
       puts "         #{unused_team.members_url.colorize(:yellow)}" if verbose?
     end
 
@@ -48,18 +47,17 @@ module Remover
     end
 
     def repos_url
-       puts "         Repositories URL:".colorize(color)
-       puts "         #{unused_team.repositories_url.colorize(:yellow)}" if verbose?
+      puts '         Repositories URL:'.colorize(color)
+      puts "         #{unused_team.repositories_url.colorize(:yellow)}" if verbose?
     end
 
     def report_and_delete
-      puts "                   !DELETED!".colorize(:red) if delete
+      puts '                   !DELETED!'.colorize(:red) if delete
       unused_team.delete_team
     end
 
     def color_it
       color
     end
-
   end
 end

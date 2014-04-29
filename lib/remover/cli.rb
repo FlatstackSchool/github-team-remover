@@ -3,12 +3,12 @@ require 'colorize'
 
 module Remover
   class CLI < Thor
-    method_option :organization, :aliases => '--o', required: true
-    method_option :login, :aliases => '--l', required: true
-    method_option :password, :aliases => '--p', required: true
-    method_option :color, :default => :white, :aliases => '--c'
-    method_option :verbose, :aliases => '--v'
-    method_option :delete, :aliases => '--d'
+    method_option :organization, aliases: '--o', required: true
+    method_option :login, aliases: '--l', required: true
+    method_option :password, aliases: '--p', required: true
+    method_option :color, default: :white, aliases: '--c'
+    method_option :verbose, aliases: '--v'
+    method_option :delete, aliases: '--d'
 
     desc('|Commands:', 'help list for more info')
 

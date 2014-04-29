@@ -20,8 +20,8 @@ module Remover
 
     def members_url
       if with_members?
-        hash = Hash(*github_client.team_members(github_team.id))
-         hash[:html_url].to_s
+        users_hash = Hash(*github_client.team_members(github_team.id))
+        users_hash[:html_url].to_s
       else
         'no members'
       end
@@ -29,8 +29,8 @@ module Remover
 
     def repositories_url
       if with_repositories?
-        hash = Hash(*github_client.team_repositories(github_team.id))
-        hash[:html_url].to_s
+        repos_hash = Hash(*github_client.team_repositories(github_team.id))
+        repos_hash[:html_url].to_s
       else
         'no repositories'
       end

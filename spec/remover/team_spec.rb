@@ -55,10 +55,10 @@ describe Remover::Team do
         allow(github_client).to receive(:delete_team) { true }
       end
 
-    it 'returns true' do
-      expect(team.delete_team).to eq(github_client.delete_team(github_team.id))
+      it 'returns true' do
+        expect(team.delete_team).to eq(github_client.delete_team(github_team.id))
+      end
     end
-  end
 
     context 'if not deleted' do
       before do
