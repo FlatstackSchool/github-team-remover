@@ -27,17 +27,7 @@ module Remover
       Remover.configuration.load_from_options!(options)
       puts 'Unused teams:'.colorize(color)
       Remover::List.new(github).unused_teams.each do |unused_team|
-        puts '         ------------------------------'.colorize(color)
-        puts '                   DELETED!'.colorize(:red) if delete?
-        puts "         Team name: #{unused_team.name}".colorize(color)
-        puts "         Members: #{unused_team.members_amount}".colorize(color)
-        puts '         Members URL:'.colorize(color) if verbose?
-        puts "         #{unused_team.members_url.colorize(:yellow)}" if verbose?
-        puts "         Repositories: #{unused_team.repositories_amount}".colorize(color)
-        puts '         Repositories URL:'.colorize(color) if verbose?
-        puts "         #{unused_team.repositories_url.colorize(:yellow)}" if verbose?
-        puts '         ------------------------------'.colorize(color)
-        unused_team.delete_team if delete?
+        Remover::Reporter.new(unused_team, color, verbose?, delete?).report_to_cli
       end
     end
 

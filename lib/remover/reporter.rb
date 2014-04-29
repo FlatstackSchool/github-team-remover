@@ -13,14 +13,22 @@ module Remover
       puts "         ------------------------------".colorize(color_it)
       team_name
       members_amount
-      members_url
+      members_url if verbose?
       repos_amount
-      repos_url
-      report_and_delete
+      repos_url if verbose?
+      report_and_delete if delete?
       puts "         ------------------------------".colorize(color_it)
     end
 
     private
+
+    def verbose?
+      true if @verbose
+    end
+
+    def delete?
+      true if @delete
+    end
 
     def team_name
       puts "         Team name: #{unused_team.name}".colorize(color_it)
