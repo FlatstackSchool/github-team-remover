@@ -2,6 +2,7 @@ require 'thor'
 
 module Remover
   class CLI < Thor
+
     method_option :organization, aliases: '--org', required: true
     method_option :login, aliases: '--log', required: true
     method_option :password, aliases: '--pas', required: true
