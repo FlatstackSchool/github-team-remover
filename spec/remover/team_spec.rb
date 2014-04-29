@@ -49,4 +49,66 @@ describe Remover::Team do
       end
     end
   end
+
+  describe '#number_of_members' do
+    before do
+      allow(github_client).to receive(:team_members) { [] }
+    end
+
+    it 'returns number of members' do
+      expect(team.number_of_members).to eq(github_client.team_members(github_team.id).size)
+    end
+  end
+
+  describe '#number_of_repositories' do
+    before do
+      allow(github_client).to receive(:team_repositories) { [] }
+    end
+
+    it 'returns number of repositories' do
+      expect(team.number_of_repositories).to eq(github_client.team_repositories(github_team.id).size)
+    end
+  end
+
+  describe '#members' do
+    before do
+      allow(github_client).to receive(:team_members) { [] }
+    end
+
+    it 'returns array of members' do
+      expect(team.members).to eq(github_client.team_members(github_team.id))
+    end
+  end
+
+  describe '#repositories' do
+    before do
+      allow(github_client).to receive(:team_repositories) { [] }
+    end
+
+    it 'returns array of repositories' do
+      expect(team.repositories).to eq(github_client.team_repositories(github_team.id))
+    end
+  end
+
+  describe '#remove' do
+    context 'if teams removed' do
+      before do
+        allow(github_client).to receive(:delete_team) { true }
+      end
+
+      it 'returns true' do
+        expect(team.remove).to eq(github_client.delete_team(github_team.id))
+      end
+    end
+
+    context 'if teams not removed' do
+      before do
+        allow(github_client).to receive(:delete_team) { false }
+      end
+
+      it 'returns false' do
+        expect(team.remove).to eq(github_client.delete_team(github_team.id))
+      end
+    end
+  end
 end

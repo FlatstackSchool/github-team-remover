@@ -2,11 +2,11 @@ require 'thor'
 
 module Remover
   class CLI < Thor
-    method_option :organization, required: true
-    method_option :login, required: true
-    method_option :password, required: true
-    method_option :verbose, desc: 'Puts members and repositories links'
-    method_option :remove, desc: 'Remove unused teams'
+    method_option :organization, aliases: '--o', required: true
+    method_option :login, aliases: '--l', required: true
+    method_option :password, aliases: '--p', required: true
+    method_option :verbose, aliases: '--v', desc: 'Puts members and repositories links'
+    method_option :remove, aliases: '--r', desc: 'Remove unused teams'
 
     desc('list', 'List unused teams')
 

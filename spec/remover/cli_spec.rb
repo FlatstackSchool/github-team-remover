@@ -19,6 +19,18 @@ describe Remover::CLI do
     it 'true' do
       expect(configuration.verbose).to eq('true')
     end
+
+    context 'if #verbose false' do
+      let(:options) do
+        {
+          'verbose' => 'false'
+        }
+      end
+
+      it 'false' do
+        expect(configuration.verbose).to eq('false')
+      end
+    end
   end
 
   describe '#remove' do
@@ -28,6 +40,18 @@ describe Remover::CLI do
 
     it 'true' do
       expect(configuration.remove).to eq('true')
+    end
+
+    context 'if #remove false' do
+      let(:options) do
+        {
+          'remove' => 'false'
+        }
+      end
+
+      it 'false' do
+        expect(configuration.remove).to eq('false')
+      end
     end
   end
 end
