@@ -3,7 +3,9 @@ describe Remover::Configuration do
     {
       'organization' => 'FlatSchool',
       'login' => 'fs-school',
-      'password' => '123456'
+      'password' => '123456',
+      'verbose' => 'true',
+      'remove' => 'true'
     }
   end
 

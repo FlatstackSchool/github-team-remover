@@ -1,6 +1,6 @@
 module Remover
   class Configuration
-    OPTIONS = %i(organization login password)
+    OPTIONS = %i(organization login password remove)
 
     attr_accessor(*OPTIONS)
 
