@@ -2,33 +2,26 @@ require 'thor'
 
 module Remover
   class CLI < Thor
-    method_option :organization, aliases: '--o', required: true
-    method_option :login, aliases: '--l', required: true
-    method_option :password, aliases: '--p', required: true
-    method_option :verbose, aliases: '--v', desc: 'Puts members and repositories links'
-    method_option :remove, aliases: '--r', desc: 'Remove unused teams'
 
+    method_option :organization, aliases: '--org', required: true
+    method_option :login, aliases: '--log', required: true
+    method_option :password, aliases: '--pas', required: true
+    method_option :verbose, aliases: '--ver', desc: 'Puts additional info'
+    method_option :remove, aliases: '--rem', desc: 'Removes unused teams'
     desc('list', 'List unused teams')
 
     def list
       Remover.configuration.load_from_options!(options)
-
       Remover::List.new(github).unused_teams.each do |team|
-        Remover::Output.new(team, verbose?, remove?).output
+       puts Remover::Formatter.new(team).list_output
+
+        team.delete_team if options[:remove]
       end
     end
 
     default_task :list
 
     private
-
-    def verbose?
-      options[:verbose]
-    end
-
-    def remove?
-      options[:remove]
-    end
 
     def github
       Remover::Github.new(octokit)

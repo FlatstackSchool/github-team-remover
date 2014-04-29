@@ -1,54 +1,52 @@
-require 'colorize'
+require 'colored'
 
 module Remover
   class Output
-    attr_accessor :team, :verbose, :remove
+    TEAM_NAME = "    Team Name: %{count}"
+    MEMBERS_AMOUNT = "      Members amount: %{count}"
+    REPOS_AMOUNT = "      Repositories amount: %{count}"
+    REPOS_LIST = "        %{count}"
+    MEMBERS_LIST = "        %{count}"
 
-    def initialize(team, verbose, remove)
-      @team, @verbose, @remove = team, verbose, remove
+
+    attr_accessor :team
+
+    def initialize(team)
+      @team = team
     end
 
-    def output
-      team_name
-      number_of_members
-      members if verbose
-      puts
-      number_of_repositories
-      repositories if verbose
-      puts
-      removed_team if remove
-      puts
+    def list_output
+      put_team_name
+      put_repos_amount
+      put_repos_list if verbose
+      put_members_amount
+      put_members_list if verbose
     end
 
     private
 
-    def team_name
-      puts "#{team.name}".colorize(:blue)
+    def put_repos_amount
+        (REPOS_AMOUNT % {count: team.repos_amount}).green
     end
 
-    def number_of_members
-      puts "    Number of members: #{team.number_of_members}".colorize(:light_blue)
+    def put_members_amount
+      (MEMBERS_AMOUNT % {count: team.members_amount}).green
     end
 
-    def number_of_repositories
-      puts "    Number of repositories: #{team.number_of_repositories}".colorize(:light_blue)
+    def put_team_name
+      (TEAM_NAME % {count: team.name}).red
     end
 
-    def members
-      team.members.each do |member|
-        puts "     #{member.login}:  #{member.html_url}".colorize(:green)
+    def put_repos_list
+      team.list_repos.each do |repos|
+        (REPOS_LIST % {count: repos.html_url}).yellow
       end
     end
 
-    def repositories
-      team.repositories.each do |repo|
-        puts "     #{repo.name}:  #{repo.html_url}".colorize(:green)
+    def put_members_list
+      team.list_members.each do |member|
+        (MEMBERS_LIST % {count: member.html_url}).yellow
       end
-    end
-
-    def removed_team
-      team.remove
-      puts "     #{team.name} removed".colorize(:yellow)
     end
   end
 end
